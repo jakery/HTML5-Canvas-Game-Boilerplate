@@ -5,6 +5,8 @@
  */
 var player;
 
+var solid;
+
 /**
  * Keys used for various directions.
  *
@@ -41,13 +43,13 @@ function update() {
 function draw() {
   // Draw a background. This is just for illustration so we can see scrolling.
   context.drawCheckered(80, 0, 0, world.width, world.height);
-
+  solid.draw();
 	player.draw();
 }
 
 /**
  * A magic-named function for one-time setup.
- *
+ * 
  * @param {Boolean} first
  *   true if the app is being set up for the first time; false if the app has
  *   been reset and is starting over.
@@ -57,8 +59,12 @@ function setup(first) {
   world.resize(canvas.width + 200, canvas.height + 200);
 
   // Switch from side view to top-down.
-  Actor.prototype.GRAVITY = false;
+  Actor.prototype.GRAVITY = true;
 
   // Initialize the player.
   player = new Player();
+
+  solid = new Box(world.height - Box.prototype.DEFAULT_HEIGHT, 400);
+
+  
 }
